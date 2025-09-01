@@ -124,13 +124,79 @@
       <div class="product">
 <div class="products">
   <div class="product">
-    <img src="images/tv-lg-75.jpg" alt="TV LG 75">
+<!-- Producto TV LG 75" -->
+<div class="products">
+  <div class="product">
+    <img src="images/tv-lg-75.jpg" alt="TV LG 75" onclick="openModal(this)">
     <h3>Smart TV LG 75"</h3>
     <p>Resolución 4K UHD, gran tamaño para tu sala.</p>
     <p><strong>Precio:</strong> S/ 3,999</p>
     <p><strong>Cuotas desde:</strong> S/ 189 al mes con CrediCalidda 💳</p>
     <a href="https://wa.me/51934618887?text=Hola,%20quiero%20información%20sobre%20la%20TV%20LG%2075%22" target="_blank">
       📲 Pedir por WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- Modal solo para esta TV -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
+
+<style>
+/* Modal estilos */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 60px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.product img {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product img:hover {
+  transform: scale(1.05);
+}
+</style>
+
+<script>
+function openModal(imgElement) {
+  document.getElementById("imageModal").style.display = "block";
+  document.getElementById("modalImg").src = imgElement.src;
+}
+
+function closeModal() {
+  document.getElementById("imageModal").style.display = "none";
+}
+</script>
+
     </a>
   </div>
 </div>
