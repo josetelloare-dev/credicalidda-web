@@ -203,11 +203,28 @@ function closeModal() {
 
       </div>
 <div class="product">
-  <img src="images/motorola-g75-5g.jpg" alt="Celular Motorola G75 5G" onclick="openPopup(this)">
+<!-- Producto Motorola -->
+<div class="product">
+  <img src="images/motorola-g75-5g.jpg" alt="Celular Motorola G75 5G" onclick="openPopup('motorola-g75')">
   <h3>Motorola G75 5G</h3>
-  <p>Pantalla 6.5", 5G, 256GB de almacenamiento.</p>
-  <p><strong>Precio: S/ 1,699</strong></p>
-  <p><strong>Cuotas: Desde S/ 106 soles mensuales</strong></p>
+  <p>Pantalla 6.6", 5G, 128GB de almacenamiento.</p>
+  <p><strong>Precio: S/ 1,299</strong></p>
+  <p><strong>Cuotas: Desde S/ 89 mensuales</strong></p>
+</div>
+
+<!-- Popup Motorola -->
+<div id="popup-motorola-g75" class="popup">
+  <span class="close" onclick="closePopup('motorola-g75')">&times;</span>
+  <div class="popup-content">
+    <img src="images/motorola-g75-5g.jpg" alt="Motorola G75 5G">
+    <h2>Motorola G75 5G</h2>
+    <p><strong>Precio: S/ 1,699</strong></p>
+    <p><strong>Cuotas: Desde S/ 106 mensuales</strong></p>
+    <a href="https://wa.me/51934618887?text=Hola,%20quiero%20más%20información%20sobre%20el%20Motorola%20G75%205G" 
+       target="_blank" class="btn-whatsapp">📲 Pedir por WhatsApp</a>
+  </div>
+</div>
+
 </div>
 
 </div>
