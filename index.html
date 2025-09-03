@@ -203,22 +203,28 @@ function closeModal() {
 
       </div>
 <!-- Producto Motorola -->
-<div class="product">
-  <img src="images/motorola-g75-5g.jpg" alt="Celular Motorola G75 5G" onclick="openPopup('motorola-g75')">
+<div class="product-card">
+  <img src="images/motorola-g75-5g.jpg" alt="Motorola G75 5G" onclick="openPopup('motorola')">
   <h3>Motorola G75 5G</h3>
   <p>Pantalla 6.6", 5G, 128GB de almacenamiento.</p>
-  <p><strong>Precio: S/ 1,299</strong></p>
-  <p><strong>Cuotas: Desde S/ 89 mensuales</strong></p>
+  <p><strong>Precio:</strong> S/ 1,299</p>
+  <p><strong>Cuotas desde:</strong> S/ 89 al mes con CrediCalidda 💳</p>
+  <a href="https://wa.me/51934618887?text=Hola,%20quiero%20el%20Motorola%20G75%205G" 
+     target="_blank" class="btn-whatsapp">📲 Pedir por WhatsApp</a>
 </div>
 
-<div class="product-card">
-  <img src="images/tv-lg-75.jpg" alt="Smart TV LG 75 UHD">
-  <h3>Smart TV LG 75"</h3>
-  <p>Resolución 4K UHD, gran tamaño para tu sala.</p>
-  <p><strong>Precio:</strong> S/ 3,999</p>
-  <p><strong>Cuotas desde:</strong> S/ 189 al mes con CrediCalidda 💳</p>
-  <a href="https://wa.me/51934618887?text=Hola,%20quiero%20el%20Smart%20TV%20LG%2075%22" 
-     target="_blank" class="btn-whatsapp">📲 Pedir por WhatsApp</a>
+<!-- Pop-up -->
+<div id="popup-motorola" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('motorola')">&times;</span>
+    <img src="images/motorola-g75-5g.jpg" alt="Motorola G75 5G">
+    <h3>Motorola G75 5G</h3>
+    <p>Pantalla 6.6", 5G, 128GB de almacenamiento.</p>
+    <p><strong>Precio:</strong> S/ 1,299</p>
+    <p><strong>Cuotas desde:</strong> S/ 89 al mes con CrediCalidda 💳</p>
+    <a href="https://wa.me/51934618887?text=Hola,%20quiero%20el%20Motorola%20G75%205G" 
+       target="_blank" class="btn-whatsapp">📲 Pedir por WhatsApp</a>
+  </div>
 </div>
 
 <!-- Estilos -->
@@ -237,14 +243,7 @@ function closeModal() {
   width: 100%;
   border-radius: 10px;
   margin-bottom: 15px;
-}
-.product-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-.product-card p {
-  margin: 5px 0;
-  font-size: 0.95rem;
+  cursor: pointer;
 }
 .btn-whatsapp {
   display: inline-block;
@@ -260,60 +259,49 @@ function closeModal() {
 .btn-whatsapp:hover {
   background: #1ebe57;
 }
-</style>
-
-  </div>
-</div>
-
-<!-- ESTILOS POPUP -->
-<style>
+/* Pop-up */
 .popup {
   display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.6);
 }
 .popup-content {
   background: #fff;
   margin: 5% auto;
   padding: 20px;
+  border-radius: 15px;
   width: 90%;
-  max-width: 400px;
-  border-radius: 10px;
+  max-width: 500px;
   text-align: center;
 }
 .popup-content img {
   max-width: 100%;
   border-radius: 10px;
+  margin-bottom: 15px;
 }
 .close {
   position: absolute;
-  top: 10px; right: 20px;
-  font-size: 28px;
+  right: 20px;
+  top: 20px;
+  font-size: 30px;
+  font-weight: bold;
   cursor: pointer;
-}
-.btn-whatsapp {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 15px;
-  background: #25D366;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
 }
 </style>
 
-<!-- JAVASCRIPT -->
+<!-- Script -->
 <script>
-function openPopup(id) {
-  document.getElementById(id).style.display = 'block';
+function openPopup(product) {
+  document.getElementById("popup-" + product).style.display = "block";
 }
-function closePopup(id) {
-  document.getElementById(id).style.display = 'none';
+function closePopup(product) {
+  document.getElementById("popup-" + product).style.display = "none";
 }
 </script>
+
 
 </div>
   </div>
