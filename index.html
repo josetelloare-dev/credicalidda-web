@@ -113,6 +113,7 @@
       </div>
       <div class="card">
         <h3>🏠 Productos top</h3>
+        <p>Lo utlimo en tecnologia para el hogar.</p>
   </div>
 </div>
 
@@ -140,11 +141,6 @@
        class="btn-whatsapp">📲 Pedir por WhatsApp</a>
   </div>
 </div>
-
-        
-        <p>Electrodomésticos, tecnología, motos y mucho más.</p>
-      </div>
-    </div>
 <!-- POPUP GENÉRICO -->
 <div id="popup" class="popup">
   <div class="popup-content">
@@ -172,40 +168,6 @@
   }
 </script>
 
-
-  </style>
-</head>
-<body>
-<!-- POPUP GENÉRICO -->
-<div id="popup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <img id="popup-img" src="" alt="Producto ampliado">
-  </div>
-</div>
-
-<script>
-  function openPopup(productId) {
-    let imgSrc = "";
-
-    if(productId === "lg75") {
-      imgSrc = "images/tv-lg-75.jpg"; 
-    } else if(productId === "motorola-g75") {
-      imgSrc = "images/motorola-g75-5g.jpg";
-    }
-
-    document.getElementById("popup-img").src = imgSrc;
-    document.getElementById("popup").style.display = "flex";
-  }
-
-  function closePopup() {
-    document.getElementById("popup").style.display = "none";
-  }
-</script>
-
-
-
-  
 <header>
   <h1>📦 CrediCALIDDA - Catálogo</h1>
   <p>Compra fácil con crédito, 0 inicial y cuotas accesibles 💳</p>
