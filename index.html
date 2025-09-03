@@ -1,393 +1,193 @@
-2<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CrediCALIDDA - Crédito Fácil y Rápido</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrediCALIDDA – Catálogo</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f8fa;
-      color: #333;
+    :root{
+      --brand1:#009688; --brand2:#4CAF50; --ink:#333; --card:#fff; --muted:#6b7280;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
     }
-    header {
-      background: #00a859;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:#f7f7f7;color:var(--ink)}
+    a{color:inherit}
+
+    /* Header */
+    header{
+      background:linear-gradient(90deg,var(--brand1),var(--brand2));
+      color:#fff;padding:28px 16px;display:flex;gap:14px;align-items:center;justify-content:center;
+      animation:slideDown .8s ease both
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.1rem;
-    }
-    section {
-      padding: 2rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .card h3 {
-      margin: 0.5rem 0;
-      color: #00a859;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .product img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    .whatsapp-btn {
-      display: block;
-      width: max-content;
-      margin: 2rem auto;
-      background: #25D366;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: 0.3s;
-    }
-    .whatsapp-btn:hover {
-      background: #1ebe5d;
-    }
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-    }
+    header img{width:62px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2));animation:bounce 2.2s infinite}
+    header h1{margin:0;font-size:clamp(22px,3.5vw,34px);letter-spacing:.5px}
+    header p{margin:2px 0 0;opacity:.95}
+
+    @keyframes slideDown{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+    /* Sección contenedor */
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px}
+
+    /* Beneficios */
+    .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:18px;margin-bottom:26px}
+    .benefit{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:18px;text-align:center;transition:transform .25s}
+    .benefit:hover{transform:translateY(-4px)}
+    .benefit h4{margin:8px 0 4px}
+    .benefit p{margin:0;color:var(--muted);font-size:.95rem}
+
+    /* Título sección */
+    .section-title{font-size:clamp(18px,2.8vw,24px);margin:8px 0 18px;font-weight:700}
+
+    /* Productos */
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+    .product{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:14px;text-align:center;transition:transform .2s,box-shadow .2s}
+    .product:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+    .product img{width:100%;height:200px;object-fit:contain;border-radius:10px;cursor:pointer}
+    .product h3{margin:12px 0 6px}
+    .muted{color:var(--muted)}
+    .price{font-weight:700}
+    .btn-whatsapp{display:inline-block;margin-top:10px;padding:10px 16px;background:#25D366;color:#fff;text-decoration:none;border-radius:8px;font-weight:600}
+    .btn-whatsapp:hover{background:#1ebe5d}
+
+    /* Popup */
+    .popup{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.7);justify-content:center;align-items:center;padding:18px}
+    .popup.open{display:flex}
+    .popup-card{background:#fff;max-width:560px;width:100%;border-radius:16px;padding:18px;box-shadow:var(--shadow);animation:zoom .25s ease}
+    .popup-media{width:100%;max-height:60vh;object-fit:contain;border-radius:12px}
+    .popup h3{margin:12px 0 6px}
+    .popup .x{position:absolute;top:14px;right:18px;color:#fff;font-size:28px;cursor:pointer}
+    @keyframes zoom{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
   </style>
 </head>
 <body>
+
+  <!-- Header con “asesor financiero” -->
   <header>
-    <h1>CrediCALIDDA</h1>
-    <p>¡Haz realidad tus planes con 0 inicial y cuotas súper accesibles!</p>
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Asesor financiero">
+    <div>
+      <h1>CrediCALIDDA</h1>
+      <p>0 inicial y cuotas que sí calzan contigo. Te ayudamos a decidir mejor.</p>
+    </div>
   </header>
 
-  <section>
-    <h2>Beneficios exclusivos</h2>
+  <div class="wrap">
+
+    <!-- BENEFICIOS -->
     <div class="benefits">
-      <div class="card">
-        <h3>💳 Crédito activo</h3>
-        <p>Accede hasta S/ 5,000 para comprar lo que quieras.</p>
-      </div>
-      <div class="card">
-        <h3>✨ 0 Inicial</h3>
-        <p>Llévate tus productos favoritos sin pagar al inicio.</p>
-      </div>
-      <div class="card">
-        <h3>📅 Cuotas cómodas</h3>
-        <p>Planes de pago que se adaptan a tu bolsillo.</p>
-      </div>
-      <div class="card">
-        <h3>🏠 Productos top</h3>
-        <p>Lo utlimo en tecnologia para el hogar.</p>
-  </div>
-</div>
+      <div class="benefit"><div style="font-size:28px">💳</div><h4>Crédito activo</h4><p>Hasta S/ 5,000 para lo que quieras.</p></div>
+      <div class="benefit"><div style="font-size:28px">✨</div><h4>0 inicial</h4><p>Empieza hoy, pagas en cuotas.</p></div>
+      <div class="benefit"><div style="font-size:28px">📆</div><h4>Cuotas cómodas</h4><p>Planes a tu medida, sin estrés.</p></div>
+      <div class="benefit"><div style="font-size:28px">🔥</div><h4>Productos top</h4><p>Tecnología y hogar de primera.</p></div>
+    </div>
 
-
-<div class="products">
-  <!-- Producto TV LG 75" -->
-  <div class="product">
-    <img src="images/tv-lg-75.jpg" 
-         alt="Smart TV LG 75 UHD 4K" 
-         onclick="openPopup('images/tv-lg-75.jpg')">
-    <h3>Smart TV LG 75"</h3>
-    <p>Resolución 4K UHD, gran tamaño para tu sala.</p>
-    <p><strong>Precio: S/ 4,199</strong></p>
-    <p><strong>Cuotas desde: S/ 163 al mes con CrediCalidda 💳</strong></p>
-    <a href="https://wa.me/519934618887?text=Hola%20quiero%20más%20información%20del%20Smart%20TV%20LG%2075"
-       class="btn-whatsapp">📲 Pedir por WhatsApp</a>
+    <!-- PRODUCTOS -->
+    <div class="section-title">Explora nuestros productos</div>
+    <div id="products" class="products"><!-- se llena por JS --></div>
   </div>
 
-  <!-- Producto Motorola G75 5G -->
-  <div class="product">
-    <img src="images/motorola-g75-5g.jpg" 
-         alt="Celular Motorola G75 5G" 
-         onclick="openPopup('images/motorola-g75-5g.jpg')">
-    <h3>Motorola G75 5G</h3>
-    <p>Pantalla 6.8", 5G, 128GB de almacenamiento.</p>
-    <p><strong>Precio: S/ 1,699</strong></p>
-    <p><strong>Cuotas desde: S/ 108 al mes con CrediCalidda 💳</strong></p>
-    <a href="https://wa.me/519934618887?text=Hola%20quiero%20más%20información%20del%20Motorola%20G75%205G"
-       class="btn-whatsapp">📲 Pedir por WhatsApp</a>
-  </div>
-</div>
-
-<!-- POPUP -->
-<div id="popup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <img id="popup-img" src="" alt="Producto ampliado">
-  </div>
-</div>
-
-  </div>
-</div>
-
-  </div>
-</div>
-/* POPUP */
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center; /* 👈 centra vertical y horizontal */
-}
-
-.popup-content {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  max-width: 90%;
-  max-height: 90%;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.popup-content img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 8px;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-}
-
-  }
-</script>
-<script>
-  function openPopup(imgSrc) {
-    document.getElementById("popup-img").src = imgSrc;
-    document.getElementById("popup").style.display = "flex"; // 👈 flex para centrar
-  }
-
-  function closePopup() {
-    document.getElementById("popup").style.display = "none";
-  }
-</script>
-
-</script>
-
-<header>
-  <h1>📦 CrediCALIDDA - Catálogo</h1>
-  <p>Compra fácil con crédito, 0 inicial y cuotas accesibles 💳</p>
-</header>
-
-<div class="container">
-
-  <div class="category">
-    <h2>📺 Televisores</h2>
-    <p>Marcas como LG, Samsung, Hisense y más en diferentes tamaños y modelos.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Televisores">Consultar en WhatsApp</a>
+  <!-- POPUP genérico -->
+  <div id="popup" class="popup" aria-hidden="true">
+    <span class="x" onclick="cerrarPopup()">&times;</span>
+    <div class="popup-card" role="dialog" aria-modal="true">
+      <img id="pimg" class="popup-media" src="" alt="">
+      <h3 id="ptitle"></h3>
+      <p class="muted" id="pdesc"></p>
+      <p class="price" id="pprice"></p>
+      <p id="pfees"></p>
+      <a id="pwa" class="btn-whatsapp" target="_blank" rel="noopener">📲 Pedir por WhatsApp</a>
+    </div>
   </div>
 
-  <div class="category">
-    <h2>🔊 Audio y Sonido</h2>
-    <p>Parlantes, barras de sonido y equipos de última generación para tu entretenimiento.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Audio">Consultar en WhatsApp</a>
-  </div>
+  <script>
+    /* ==============================
+       CONFIGURACIÓN RÁPIDA
+       ============================== */
 
-  <div class="category">
-    <h2>💻 Laptops y Computadoras</h2>
-    <p>Modelos potentes para trabajo, estudio o gaming con crédito inmediato.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Laptops">Consultar en WhatsApp</a>
-  </div>
+    // 1) Cambia aquí tu WhatsApp (si hiciera falta):
+    const WHATSAPP = "51934618887"; // +51 934 618 887
 
-  <div class="category">
-    <h2>📱 Celulares y Tablets</h2>
-    <p>Últimos modelos de smartphones y tablets con la mejor financiación.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Celulares">Consultar en WhatsApp</a>
-  </div>
+    // 2) Catálogo dinámico: agrega/edita productos aquí.
+    //    IMAGENES: súbelas a la carpeta /images del repo y pon la ruta.
+    const productos = [
+      {
+        id: "lg75",
+        nombre: 'Smart TV LG 75"',
+        img: "images/tv-lg-75.jpg",
+        descripcion: "Resolución 4K UHD, gran tamaño para tu sala.",
+        precio: 4199,
+        cuotas: 163
+      },
+      {
+        id: "motorola-g75",
+        nombre: "Motorola G75 5G",
+        img: "images/motorola-g75-5g.jpg",
+        descripcion: 'Pantalla 6.8", 5G, 128GB de almacenamiento.',
+        precio: 1699,
+        cuotas: 108
+      }
+      // ➕ Ejemplo para agregar otro:
+      // { id:"hisense40", nombre:"TV Hisense 40''", img:"images/hisense-40.jpg", descripcion:"Full HD, Smart OS", precio:1199, cuotas:75 }
+    ];
 
-  <div class="category">
-    <h2>❄️ Refrigeradoras</h2>
-    <p>Modelos modernos y eficientes que se adaptan a tu hogar.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Refrigeradoras">Consultar en WhatsApp</a>
-  </div>
+    /* ==============================
+       RENDER AUTOMÁTICO
+       ============================== */
+    const $list = document.getElementById("products");
+    function formatMoney(n){ return "S/ " + n.toLocaleString("es-PE"); }
 
-  <div class="category">
-    <h2>🧺 Lavadoras</h2>
-    <p>Lava y cuida tu ropa con tecnología de última generación.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Lavadoras">Consultar en WhatsApp</a>
-  </div>
+    function render(){
+      $list.innerHTML = productos.map(p => `
+        <div class="product">
+          <img src="${p.img}" alt="${p.nombre}" onclick="abrirPopup('${p.id}')">
+          <h3>${p.nombre}</h3>
+          <p class="muted">${p.descripcion}</p>
+          <p class="price">Precio: ${formatMoney(p.precio)}</p>
+          <p>Cuotas desde: <b>${formatMoney(p.cuotas)}</b> al mes</p>
+          <a class="btn-whatsapp" target="_blank"
+             href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero más información sobre ' + p.nombre)}">
+            📲 Pedir por WhatsApp
+          </a>
+        </div>
+      `).join("");
+    }
+    render();
 
-  <div class="category">
-    <h2>🔥 Cocinas y Hornos</h2>
-    <p>Cocinas, hornos y electrodomésticos ideales para tu hogar.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Cocinas">Consultar en WhatsApp</a>
-  </div>
+    /* ==============================
+       POPUP
+       ============================== */
+    const $popup = document.getElementById("popup");
+    const $pimg  = document.getElementById("pimg");
+    const $ptitle= document.getElementById("ptitle");
+    const $pdesc = document.getElementById("pdesc");
+    const $pprice= document.getElementById("pprice");
+    const $pfees = document.getElementById("pfees");
+    const $pwa   = document.getElementById("pwa");
 
-  <div class="category">
-    <h2>🛏️ Colchones</h2>
-    <p>Descansa mejor con colchones de alta calidad y gran comodidad.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Colchones">Consultar en WhatsApp</a>
-  </div>
+    function abrirPopup(id){
+      const p = productos.find(x=>x.id===id);
+      if(!p) return;
+      $pimg.src = p.img;
+      $pimg.alt = p.nombre;
+      $ptitle.textContent = p.nombre;
+      $pdesc.textContent  = p.descripcion;
+      $pprice.textContent = "Precio: " + formatMoney(p.precio);
+      $pfees.textContent  = "Cuotas desde: " + formatMoney(p.cuotas) + " al mes con CrediCALIDDA";
+      $pwa.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero más información sobre ' + p.nombre)}`;
+      $popup.classList.add("open");
+      $popup.setAttribute("aria-hidden","false");
+    }
 
-  <div class="category">
-    <h2>🛴 Scooters y Combos</h2>
-    <p>Movilidad práctica y ofertas exclusivas en combos para el hogar.</p>
-    <a class="btn" href="https://wa.me/51934618887?text=Hola,%20quiero%20info%20sobre%20Scooters">Consultar en WhatsApp</a>
-  </div>
+    function cerrarPopup(){
+      $popup.classList.remove("open");
+      $popup.setAttribute("aria-hidden","true");
+    }
 
-</div>
-
-<footer>
-  <p>© 2025 CrediCALIDDA - Todos los derechos reservados</p>
-</footer>
-
+    // Cerrar al clickear fuera de la tarjeta o con ESC
+    $popup.addEventListener("click", e => { if(e.target.id==="popup") cerrarPopup(); });
+    document.addEventListener("keydown", e => { if(e.key==="Escape") cerrarPopup(); });
+  </script>
 </body>
 </html>
-<img src="images/tv-lg-50.jpg" alt="TV LG 75">
-.product img {
-  width: 250px;   /* todas iguales de ancho */
-  height: 250px;  /* todas iguales de alto */
-  object-fit: contain;
-}
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; /* espacio entre productos */
-  margin-top: 20px;
-}
 
-.product img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.product {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-}
-.products {
-  display: flex;
-  justify-content: center;
-  gap: 20px; /* espacio entre productos */
-  margin-top: 20px;
-  flex-wrap: wrap; /* para que en celular se acomoden abajo */
-}
-
-.product {
-  background: white;
-  width: 300px; /* tamaño fijo como el Motorola */
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.product img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain; /* mantiene proporciones sin deformar */
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-whatsapp {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 15px;
-  background: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.btn-whatsapp:hover {
-  background: #1ebe5d;
-}
-/* POPUP */
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  max-width: 600px;
-  max-height: 80%;
-  text-align: center;
-}
-
-.popup-content img {
-  width: 100%;
-  height: auto;
-}
-
-.close {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  font-size: 28px;
-  color: white;
-  cursor: pointer;
-}
-
-/* SEPARACIÓN EXTRA DEL CATÁLOGO */
-.products {
-  margin-top: 50px; /* 👈 aquí aumentas la separación con el catálogo */
 }
