@@ -149,16 +149,16 @@
   </div>
 </div>
 
+<!-- POPUP GENÉRICO -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="Producto ampliado">
+  </div>
+</div>
+
 <script>
-  function openPopup(productId) {
-    let imgSrc = "";
-
-    if(productId === "lg75") {
-      imgSrc = "images/tv-lg-75.jpg"; 
-    } else if(productId === "motorola-g75") {
-      imgSrc = "images/motorola-g75-5g.jpg";
-    }
-
+  function openPopup(imgSrc) {
     document.getElementById("popup-img").src = imgSrc;
     document.getElementById("popup").style.display = "flex";
   }
@@ -166,6 +166,8 @@
   function closePopup() {
     document.getElementById("popup").style.display = "none";
   }
+</script>
+
 </script>
 
 <header>
