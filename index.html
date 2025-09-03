@@ -116,29 +116,32 @@
         <p>Electrodomésticos, tecnología, motos y mucho más.</p>
       </div>
     </div>
-<div class="products">
-  <!-- Producto TV LG 75" -->
-  <div class="product">
-    <img src="images/tv-lg-75.jpg" alt="Smart TV LG 75 UHD 4K" onclick="openPopup('lg75')">
-    <h3>Smart TV LG 75"</h3>
-    <p>Resolución 4K UHD, gran tamaño para tu sala.</p>
-    <p><strong>Precio: S/ 4,199</strong></p>
-    <p><strong>Cuotas desde: S/ 163 al mes con CrediCalidda 💳</strong></p>
-    <a href="https://wa.me/519934618887?text=Hola%20quiero%20más%20información%20del%20Smart%20TV%20LG%2075"
-       class="btn-whatsapp">📲 Pedir por WhatsApp</a>
-  </div>
-
-  <!-- Producto Motorola G75 5G -->
-  <div class="product">
-    <img src="images/motorola-g75-5g.jpg" alt="Celular Motorola G75 5G" onclick="openPopup('motorola-g75')">
-    <h3>Motorola G75 5G</h3>
-    <p>Pantalla 6.8", 5G, 128GB de almacenamiento.</p>
-    <p><strong>Precio: S/ 1,699</strong></p>
-    <p><strong>Cuotas desde: S/ 108 al mes con CrediCalidda 💳</strong></p>
-    <a href="https://wa.me/519934618887?text=Hola%20quiero%20más%20información%20del%20Motorola%20G75%205G"
-       class="btn-whatsapp">📲 Pedir por WhatsApp</a>
+<!-- POPUP GENÉRICO -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="Producto ampliado">
   </div>
 </div>
+
+<script>
+  function openPopup(productId) {
+    let imgSrc = "";
+
+    if(productId === "lg75") {
+      imgSrc = "images/tv-lg-75.jpg"; 
+    } else if(productId === "motorola-g75") {
+      imgSrc = "images/motorola-g75-5g.jpg";
+    }
+
+    document.getElementById("popup-img").src = imgSrc;
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
 
 
   </style>
@@ -283,4 +286,43 @@
 
 .btn-whatsapp:hover {
   background: #1ebe5d;
+}
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 600px;
+  max-height: 80%;
+  text-align: center;
+}
+
+.popup-content img {
+  width: 100%;
+  height: auto;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* SEPARACIÓN EXTRA DEL CATÁLOGO */
+.products {
+  margin-top: 50px; /* 👈 aquí aumentas la separación con el catálogo */
 }
